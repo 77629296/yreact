@@ -22,7 +22,7 @@ function createTextElement(text) {
 
 function createDom(fiber) {
   console.error('createDom', fiber)
-  // if (fiber.type === 'h1') throw new Error('33')
+  if (fiber.type === 'h2') throw new Error('33')
   const dom =
     fiber.type == 'TEXT_ELEMENT'
       ? document.createTextNode('')
@@ -35,8 +35,6 @@ function createDom(fiber) {
     })
 
   return dom
-  // element.props.children.forEach((child) => render(child, dom))
-  // container.appendChild(dom)
 }
 
 function commitRoot() {
