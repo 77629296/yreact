@@ -1,18 +1,8 @@
 /** @jsx Yreact.createElement */
-const container = document.getElementById('root')
-
-const updateValue = (e) => {
-  rerender(e.target.value)
+function App(props) {
+  return <h1>Hi {props.name}</h1>
 }
-
-const rerender = value => {
-  const element = (
-    <div>
-      <input onInput={updateValue} value={value} />
-      <h2>Hello {value}</h2>
-    </div>
-  )
-  Yreact.render(element, container)
-}
-
-rerender("World")
+const element = <App name="foo" />
+console.log(element)
+const container = document.getElementById("root")
+Yreact.render(element, container)
