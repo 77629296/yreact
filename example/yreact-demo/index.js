@@ -1,33 +1,19 @@
 /** @jsx Yreact.createElement */
-let dom = []
-for(let i = 0; i < 100; i++) {
-  dom.push({
-    type: 'span',
-    props: {
-      children: [{
-        type: 'TEXT_ELEMENT',
-        props: {
-          nodeValue: i,
-          children: []
-        }
-      }]
-    }
-  })
+const container = document.getElementById('root')
+
+const updateValue = (e) => {
+  rerender(e.target.value)
 }
 
-const App = (
-  <div>
-    <h1>yreact-text</h1>
-    <h2>yreact-demo</h2>
-    {
-    {
-      type: 'div',
-      props: {
-        children: dom
-      }
-    }
-    }
-  </div>
-)
-const container = document.getElementById('root')
-Yreact.render(App, container)
+const rerender = value => {
+  console.log(value)
+  const element = (
+    <div>
+      <input onInput={updateValue} value={value} />
+      <h2>Hello {value}</h2>
+    </div>
+  )
+  Yreact.render(element, container)
+}
+
+rerender("World")
