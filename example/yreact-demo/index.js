@@ -6,7 +6,6 @@ const updateValue = (e) => {
 }
 
 const rerender = value => {
-  console.log(value)
   const element = (
     <div>
       <input onInput={updateValue} value={value} />

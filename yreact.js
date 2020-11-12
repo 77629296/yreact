@@ -29,12 +29,6 @@ function createDom(fiber) {
       : document.createElement(fiber.type)
 
   updateDom(dom, {}, fiber.props)
-  // const isProperty = (key) => key !== 'children'
-  // Object.keys(fiber.props)
-  //   .filter(isProperty)
-  //   .forEach((name) => {
-  //     dom[name] = fiber.props[name]
-  //   })
 
   return dom
 }
@@ -45,6 +39,7 @@ const isNew = (prev, next) => (key) => prev[key] !== next[key]
 const isGone = (prev, next) => (key) => !(key in next)
 
 function updateDom(dom, prevProps, nextProps) {
+
   //Remove old or changed event listeners
   Object.keys(prevProps)
     .filter(isEvent)
@@ -96,7 +91,7 @@ function commitWork(fiber) {
   if (fiber.effectTag === 'PLACEMENT' && fiber.dom != null) {
     domParent.appendChild(fiber.dom)
   } else if (fiber.effectTag === 'UPDATE' && fiber.dom != null) {
-    updateDom(fiber.com, fiber.alternate.props, fiber.props)
+    updateDom(fiber.dom, fiber.alternate.props, fiber.props)
   } else if (fiber.effectTag === 'DELETION') {
     domParent.removeChild(fiber.dom)
   }
@@ -399,34 +394,6 @@ function reconcileChildren(wipFiber, elements) {
     prevSibling = newFiber
     index++
   }
-
-  // let index = 0
-  // let prevSibling = null
-
-  /**
-   * 遍历children
-   * 子元素创建新的fiber节点
-   * 首次进入 遍历[{type: div, props: {children: []}}]
-   */
-  // while (index < elements.length) {
-  //   const element = elements[index]
-  //   console.warn('element', element)
-  //   const newFiber = {
-  //     type: element.type,
-  //     props: element.props,
-  //     parent: fiber,
-  //     dom: null,
-  //   }
-  //   // 第一个节点 挂到fiber.child上
-  //   if (index === 0) {
-  //     fiber.child = newFiber
-  //   } else {
-  //     prevSibling.sibling = newFiber
-  //   }
-
-  //   prevSibling = newFiber
-  //   index++
-  // }
 }
 
 const Yreact = {
