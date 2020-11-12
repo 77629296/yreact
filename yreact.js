@@ -75,6 +75,7 @@ function updateDom(dom, prevProps, nextProps) {
 }
 
 function commitRoot() {
+  console.log("--------commitRoot--------")
   deletions.forEach(commitWork)
   commitWork(wipRoot.child)
   currentRoot = wipRoot
@@ -352,6 +353,7 @@ let wipFiber = null
 let hookIndex = null
 
 function updateFunctionComponent(fiber) {
+  console.error('hooks -- updateFunctionComponent', fiber)
   wipFiber = fiber
   hookIndex = 0
   wipFiber.hooks = []
@@ -361,6 +363,7 @@ function updateFunctionComponent(fiber) {
 }
 
 function useState(initial) {
+  console.error('hooks -- useState')
   const oldHook =
     wipFiber.alternate &&
     wipFiber.alternate.hooks &&
@@ -372,10 +375,12 @@ function useState(initial) {
 
   const actions = oldHook ? oldHook.queue : []
   actions.forEach((action) => {
+    console.error('hooks -- actions.forEach')
     hook.state = action(hook.state)
   })
 
   const setState = (action) => {
+    console.error('hooks -- setState', currentRoot)
     hook.queue.push(action)
     wipRoot = {
       dom: currentRoot.dom,
@@ -412,6 +417,7 @@ function reconcileChildren(wipFiber, elements) {
 
     // 节点类型相同 复用原节点 更新
     if (sameType) {
+      console.log('update', element.type)
       newFiber = {
         type: oldFiber.type,
         props: element.props,
