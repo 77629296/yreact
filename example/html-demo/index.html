@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>html-demo</title>
+    <script>
+      var content = ''
+      
+      function onInput() {
+        var inputEl = document.getElementById('input')
+        var value = inputEl.value
+        updateContentByDom(value)
+      }
+      
+      function updateContentByDom(content) {
+        // 获取dom节点
+        var contentEl = document.getElementById('content')
+        contentEl.innerHTML = content
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <input id="input" oninput="onInput()"/>
+      <div>
+        <span>content:</span>
+        <span id="content"></span>
+      </div>
+    </div>
+  </body>
+</html>

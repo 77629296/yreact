@@ -1,17 +1,17 @@
 /** @jsx Yreact.createElement */
 function Counter() {
-  console.error('fun reload')
-  const [state, setState] = Yreact.useState(1)
-  const testFun = () => {
-    setState(c => c + 1)
-    console.log('****', state)
+  const [content, setConcent] = Yreact.useState('')
+  const onInput = (e) => {
+    let value = e.target.value
+    setConcent(value)
   }
   return (
-    <h1 onClick={testFun}>
-      Count: {state}
-    </h1>
+    <div>
+      <input onInput={onInput} />
+      <span>content: {content}</span>
+    </div>
   )
 }
 const element = <Counter />
-const container = document.getElementById("root")
+const container = document.getElementById('root')
 Yreact.render(element, container)

@@ -375,8 +375,9 @@ function useState(initial) {
 
   const actions = oldHook ? oldHook.queue : []
   actions.forEach((action) => {
+    const isFunction = item => typeof item === 'function'
     console.error('hooks -- actions.forEach')
-    hook.state = action(hook.state)
+    hook.state = isFunction(action) ? action(hook.state) : action
   })
 
   const setState = (action) => {
