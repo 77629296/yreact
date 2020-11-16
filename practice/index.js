@@ -1,8 +1,7 @@
 /** @jsx Yreact.createElement */
 const App = (
   <div>
-    <h1 style={{ color: 'red' }}>text-h1</h1>
-    <h2>text-h2<span>22</span></h2>
+    <h1>text-h12</h1>
   </div>
 )
 

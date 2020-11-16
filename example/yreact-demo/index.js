@@ -1,7 +1,7 @@
 /** @jsx Yreact.createElement */
 const App = (
   <div>
-    <h1>h1</h1>
+    <h1>text-h1</h1>
     <h2>yreact-demo</h2>
   </div>
 )

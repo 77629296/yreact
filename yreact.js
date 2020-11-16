@@ -14,8 +14,7 @@ function createTextElement(text) {
   return {
     type: 'TEXT_ELEMENT',
     props: {
-      nodeValue: text,
-      children: [],
+      children: text,
     },
   }
 }
@@ -31,8 +30,13 @@ function render(element, container) {
     .forEach((name) => {
       dom[name] = element.props[name]
     })
-
-  element.props.children.forEach((child) => render(child, dom))
+    console.log(element.props.children);
+    if (typeof element.props.children === 'object') {
+      element.props.children.forEach((child) => render(child, dom))
+    }else {
+      dom.nodeValue = element.props.children
+    }
+    
   container.appendChild(dom)
 }
 
