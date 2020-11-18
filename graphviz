@@ -1,0 +1,228 @@
+
+##"This is an example from a real-world application, where we were using Genetic Programming to do simple symbolic regression. We needed a good way to visualize the trees that were being created, and it didn't take long to code up some lisp to create a dot file that visualized multiple individuals. The next step was to provide color-coding of key nodes so that we could illustrate crossover and mutation of individuals before-and-after-style. This is a sample dot file from some early debugging." Contributed by Wayne Folta. 
+
+##Command to get the layout: "dot  -Tpng thisfile > thisfile.png"
+
+
+graph ""
+   {
+//   node [fontsize=10,width="1", height="1", margin=0];
+    node [fontsize=20]
+  graph[fontsize=20];
+//   label="fiber数据结构"
+
+   subgraph cluster01
+   {
+   label="fiber数据结构"
+   root ;
+   root [label="fiber"] ;
+   root -- dom ;
+   dom [label="dom: div#root"];
+   root -- props ;
+   props [label="props"] ;
+   props -- children ;
+   children [label="children"] ;
+   
+   root -- rootchild ;
+   rootchild [label="child",style=filled,color=pink];
+   rootchild -- divfiber ;
+   divfiber [label="fiber",style=filled,color=pink];
+   divfiber -- divfibertype ;
+   divfibertype [label="type: div",style=filled,color=pink];
+   divfiber -- divprops ;
+   divfiber -- divfiberparent ;
+   divfiberparent [label="parent",style=filled,color=pink];
+   divfiberparent -- root ;
+   divfiber -- divfiberdom ;
+   divfiberdom [label="dom: null",style=filled,color=pink];
+   divfiberdom -- divfiberdom2 ;
+   divfiberdom2 [label="dom: null -> div",style=filled,color=hotpink];
+   divfiberdom2 -- divfiberdom3 ;
+   divfiberdom3 [label="dom: div -> div h1",style=filled,color=plum];
+   divfiberdom3 -- divfiberdom4 ;
+   divfiberdom4 [label="dom: div h1 -> div h1h2",style=filled,color=mediumorchid];
+   
+   dom -- dom2 ;
+   dom2 [label="dom: div#root =>div#root div",style=filled,color=hotpink];
+   divfiber -- divfiberchild ;
+   divfiberchild [label="child",style=filled,color=hotpink];
+   divfiberchild -- h1fiber ;
+   h1fiber [label="fiber",style=filled,color=hotpink];
+   h1fiber -- h1fibertype ;
+   h1fibertype [label="type: h1",style=filled,color=hotpink];
+   h1fiber -- h1props ;
+   h1fiber -- h1fiberparent ;
+   h1fiberparent [label="parent",style=filled,color=hotpink];
+   h1fiberparent -- divfiber ;
+   h1fiber -- h1fiberdom ;
+   h1fiberdom [label="dom: null",style=filled,color=hotpink];
+   
+   h1fiberdom -- h1fiberdom2 ;
+   h1fiberdom2 [label="dom: null -> h1",style=filled,color=plum];
+   h1fiberdom2 -- h1fiberdom3 ;
+   h1fiberdom3 [label="dom: h1 -> h1>文本1",style=filled,color=violet];
+   
+   h1fiber -- h1sibling ;
+   h1sibling [label="sibling",style=filled,color=hotpink];
+   h1sibling -- h2fiber;
+   h2fiber [label="fiber",style=filled,color=hotpink];
+   h2fiber -- h2fibertype ;
+   h2fibertype [label="type: h2",style=filled,color=hotpink];
+   h2fiber -- h2props ;
+   h2fiber -- h2fiberparent ;
+   h2fiberparent [label="parent",style=filled,color=hotpink];
+   h2fiberparent -- divfiber ;
+   h2fiber -- h2fiberdom ;
+   h2fiberdom [label="dom: null",style=filled,color=hotpink];
+   
+   h1fiber -- h1child ;
+   h1child [label="child",style=filled,color=plum];
+   h1child -- h1textfiber;
+   h1textfiber [label="fiber",style=filled,color=plum];
+   h1textfiber -- h1textfibertype ;
+   h1textfibertype [label="type: TEXT",style=filled,color=plum];
+   h1textfiber -- h1textprops ;
+   h1textfiber -- h1textfiberparent ;
+   h1textfiberparent [label="parent",style=filled,color=plum];
+   h1textfiberparent -- h1fiber ;
+   h1textfiber -- h1textfiberdom ;
+   h1textfiberdom [label="dom: null",style=filled,color=plum];
+   h1textfiberdom -- h1textfiberdom2 ;
+   h1textfiberdom2 [label="dom: null->文本1",style=filled,color=violet];
+   
+   
+   h2fiber -- h2child ;
+   h2child [label="child",style=filled,color=mediumorchid];
+   h2child -- h2textfiber;
+   h2textfiber [label="fiber",style=filled,color=mediumorchid];
+   h2textfiber -- h2textfibertype ;
+   h2textfibertype [label="type: TEXT",style=filled,color=mediumorchid];
+   h2textfiber -- h2textprops ;
+   h2textfiber -- h2textfiberparent ;
+   h2textfiberparent [label="parent",style=filled,color=mediumorchid];
+   h2textfiberparent -- h2fiber ;
+   h2textfiber -- h2textfiberdom ;
+   h2textfiberdom [label="dom: null",style=filled,color=mediumorchid];
+   h2textfiberdom -- h2textfiberdom2 ;
+   h2textfiberdom2 [label="dom: null->文本2",style=filled,color=darkorchid];
+   h2fiberdom -- h2fiberdom2 ;
+   h2fiberdom2 [label="dom: null -> h2",style=filled,color=mediumorchid];
+   
+//   div
+   children -- vnode ;
+   vnode [label="vnode",style=filled,color=lightgrey] ;
+   vnode -- type;
+   type [label="type：div"];
+   vnode -- divprops;
+   divprops [label="props"];
+   divprops -- divchildren;
+   divchildren [label="children"];
+   
+//   h1
+   divchildren -- h1vnode;
+   h1vnode [label="vnode",style=filled,color=lightgrey];
+   h1vnode -- h1type;
+   h1type [label="type：h1"];
+   h1vnode -- h1props;
+   h1props [label="props"];
+   h1props -- h1children;
+   h1children [label="children"];
+   
+   h1children -- h1text;
+   h1text [label="vnode",style=filled,color=lightgrey];
+   h1text -- h1texttype;
+   h1texttype [label="type：TEXT"];
+   h1text -- h1textprops;
+   h1textprops [label="props"];
+   h1textprops -- h1textchildren;
+   h1textchildren [label="children: []"];
+   h1textprops -- h1textValue;
+   h1textValue [label="文本1"];
+   
+//   h2
+   divchildren -- h2vnode;
+   h2vnode [label="vnode",style=filled,color=lightgrey];
+   h2vnode -- h2type;
+   h2type [label="type：h2"];
+   h2vnode -- h2props;
+   h2props [label="props"];
+   h2props -- h2children;
+   h2children [label="children"];
+   
+   h2children -- h2text;
+   h2text [label="vnode",style=filled,color=lightgrey];
+   h2text -- h2texttype;
+   h2texttype [label="type：TEXT"];
+   h2text -- h2textprops;
+   h2textprops [label="props"];
+   h2textprops -- h2textchildren;
+   h2textchildren [label="children: []"];
+   h2textprops -- h2textValue;
+   h2textValue [label="文本2"];
+ }
+
+//   subgraph cluster17
+//   {
+//   label="第一次执行"
+//   n018 ;
+//   n018 [label="EXP"] ;
+//   n018 -- n019 ;
+//   n019 [label="*"] ;
+//   n019 -- n020 ;
+//   n020 [label="X"] ;
+//   n019 -- n021 ;
+//   n021 [label="X"] ;
+//   }
+
+//   subgraph cluster21
+//   {
+//   label="3"
+//   n022 ;
+//   n022 [label="+"] ;
+//   n022 -- n023 ;
+//   n023 [label="%"] ;
+//   n023 -- n024 ;
+//   n024 [label="EXP"] ;
+//   n024 -- n025 ;
+//   n025 [label="SIN"] ;
+//   n025 -- n026 ;
+//   n026 [label="+"] ;
+//   n026 -- n027 ;
+//   n027 [label="X"] ;
+//   n026 -- n028 ;
+//   n028 [label="X"] ;
+//   n023 -- n029 ;
+//   n029 [label="SIN"] ;
+//   n029 -- n030 ;
+//   n030 [label="*"] ;
+//   n022 -- n036 ;
+//   n036 [label="*"] ;
+//   }
+
+//   subgraph cluster38
+//   {
+//   label="4"
+//   n039 ;
+//   n039 [label="%"] ;
+//   n039 -- n040 ;
+//   n040 [label="EXP"] ;
+//   n040 -- n041 ;
+//   n041 [label="%"] ;
+//   n041 -- n042 ;
+//   n042 [label="X"] ;
+//   n041 -- n043 ;
+//   n043 [label="%"] ;
+//   n043 -- n044 ;
+//   n044 [label="X"] ;
+//   n043 -- n045 ;
+//   n045 [label="X"] ;
+//   n039 -- n046 ;
+//   n046 [label="EXP"] ;
+//   n046 -- n047 ;
+//   n047 [label="SIN"] ;
+//   n047 -- n048 ;
+//   n048 [label="X"] ;
+//   }
+   }
+
+
