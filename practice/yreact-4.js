@@ -66,7 +66,6 @@ function performUnitOfWork(fiber) {
       dom: null,
       parent: fiber
     }
-
     if (index === 0) {
       fiber.child = newFiber
     } else {
