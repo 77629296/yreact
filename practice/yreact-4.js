@@ -68,6 +68,7 @@ function performUnitOfWork(fiber) {
     }
 
     if (index === 0) {
+      
       fiber.child = newFiber
     } else {
       prevSibling.sibling = newFiber
