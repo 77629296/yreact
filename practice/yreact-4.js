@@ -72,7 +72,6 @@ function performUnitOfWork(fiber) {
     } else {
       prevSibling.sibling = newFiber
     }
-
     prevSibling = newFiber
   })
   if (fiber.child) {
